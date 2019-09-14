@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.educandoweb.course.dto.CategoryDTO;
+import com.educandoweb.course.dto.UserDTO;
 import com.educandoweb.course.entities.Category;
 import com.educandoweb.course.services.CategoryService;
 
@@ -26,24 +28,24 @@ public class CategoryResource {
 	private CategoryService service;
 
 	@GetMapping
-	public ResponseEntity<List<Category>> findAll() {
+	public ResponseEntity<List<CategoryDTO>> findAll() {
 
-		List<Category> list = service.findAll();
+		List<CategoryDTO> list = service.findAll();
 		return ResponseEntity.ok().body(list);
 
 	}
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Category> findById(@PathVariable Long id) {
-		Category obj = service.findById(id);
-		return ResponseEntity.ok().body(obj);
+	public ResponseEntity<CategoryDTO> findById(@PathVariable Long id) {
+		CategoryDTO dto = service.findById(id);
+		return ResponseEntity.ok().body(dto);
 	}
 
 	@PostMapping
-	public ResponseEntity<Category> insert(@RequestBody Category obj) {
-		obj = service.insert(obj);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
-		return ResponseEntity.created(uri).body(obj);
+	public ResponseEntity<CategoryDTO> insert(@RequestBody CategoryDTO dto) {
+		CategoryDTO newDTO = service.insert(dto);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newDTO.getId()).toUri();
+		return ResponseEntity.created(uri).body(newDTO);
 	}
 
 	@DeleteMapping(value = "/{id}")
@@ -53,9 +55,9 @@ public class CategoryResource {
 	}
 
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Category> update(@PathVariable Long id, @RequestBody Category obj) {
-		obj = service.update(id, obj);
-		return ResponseEntity.ok().body(obj);
+	public ResponseEntity<CategoryDTO> update(@PathVariable Long id, @RequestBody CategoryDTO dto) {
+		dto = service.update(id, dto);
+		return ResponseEntity.ok().body(dto);
 	}
 
 }
