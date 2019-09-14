@@ -8,7 +8,6 @@ import javax.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.data.repository.support.Repositories;
 import org.springframework.stereotype.Service;
 
 import com.educandoweb.course.entities.User;
