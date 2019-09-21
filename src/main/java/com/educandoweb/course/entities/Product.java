@@ -23,7 +23,7 @@ public class Product implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
-	private String descripion;
+	private String description;
 	private Double price;
 	private String imgUrl;
 
@@ -42,7 +42,7 @@ public class Product implements Serializable {
 		super();
 		this.id = id;
 		this.name = name;
-		this.descripion = descripion;
+		this.description = descripion;
 		this.price = price;
 		this.imgUrl = imgUrl;
 	}
@@ -63,12 +63,12 @@ public class Product implements Serializable {
 		this.name = name;
 	}
 
-	public String getDescripion() {
-		return descripion;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setDescripion(String descripion) {
-		this.descripion = descripion;
+	public void setDescription(String descripion) {
+		this.description = descripion;
 	}
 
 	public Double getPrice() {

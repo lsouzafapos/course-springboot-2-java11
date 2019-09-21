@@ -6,7 +6,7 @@ public class ProductDTO {
 
 	private Long id;
 	private String name;
-	private String descripion;
+	private String description;
 	private Double price;
 	private String imgUrl;
 
@@ -18,7 +18,7 @@ public class ProductDTO {
 		super();
 		this.id = id;
 		this.name = name;
-		this.descripion = descripion;
+		this.description = descripion;
 		this.price = price;
 		this.imgUrl = imgUrl;
 	}
@@ -27,7 +27,7 @@ public class ProductDTO {
 
 		this.id = entity.getId();
 		this.name = entity.getName();
-		this.descripion = entity.getDescripion();
+		this.description = entity.getDescription();
 		this.price = entity.getPrice();
 		this.imgUrl = entity.getImgUrl();
 	}
@@ -48,12 +48,12 @@ public class ProductDTO {
 		this.name = name;
 	}
 
-	public String getDescripion() {
-		return descripion;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setDescripion(String descripion) {
-		this.descripion = descripion;
+	public void setDescription(String descripion) {
+		this.description = descripion;
 	}
 
 	public Double getPrice() {
@@ -73,7 +73,7 @@ public class ProductDTO {
 	}
 
 	public Product toEntity() {
-		return new Product(id, name, descripion, price, imgUrl);
+		return new Product(id, name, description, price, imgUrl);
 	}
 
 	@Override
