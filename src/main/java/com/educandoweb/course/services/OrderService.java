@@ -2,13 +2,17 @@ package com.educandoweb.course.services;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.educandoweb.course.dto.OrderDTO;
+import com.educandoweb.course.dto.OrderItemDTO;
 import com.educandoweb.course.entities.Order;
+import com.educandoweb.course.entities.OrderItem;
 import com.educandoweb.course.entities.User;
 import com.educandoweb.course.repositories.OrderRepository;
 import com.educandoweb.course.services.exceptions.ResourceNotFoundException;
@@ -18,7 +22,7 @@ public class OrderService {
 
 	@Autowired
 	private OrderRepository orderRepository;
-	
+
 	@Autowired
 	private AuthService authService;
 
@@ -33,11 +37,20 @@ public class OrderService {
 		authService.validadeOwnOrderOrAdmin(entity);
 		return new OrderDTO(entity);
 	}
-	
-	public List<OrderDTO> findByClient(){
+
+	public List<OrderDTO> findByClient() {
 		User client = authService.authenticated();
 		List<Order> list = orderRepository.findByClient(client);
 		return list.stream().map(e -> new OrderDTO(e)).collect(Collectors.toList());
+	}
+
+	@Transactional(readOnly = true)
+	public List<OrderItemDTO> findItems(Long id) {
+
+		Order order = orderRepository.getOne(id);
+		authService.validadeOwnOrderOrAdmin(order);
+		Set<OrderItem> set = order.getItems();
+		return set.stream().map(e -> new OrderItemDTO(e)).collect(Collectors.toList());
 	}
 
 }
