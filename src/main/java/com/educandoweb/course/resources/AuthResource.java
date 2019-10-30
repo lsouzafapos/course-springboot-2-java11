@@ -12,6 +12,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.educandoweb.course.dto.CategoryDTO;
 import com.educandoweb.course.dto.CredentialsDTO;
+import com.educandoweb.course.dto.EmailDTO;
 import com.educandoweb.course.dto.TokenDTO;
 import com.educandoweb.course.services.AuthService;
 
@@ -32,6 +33,12 @@ public class AuthResource {
 	public ResponseEntity<TokenDTO> refresh() {
 		TokenDTO tokenDTO = service.refreshToken();
 		return ResponseEntity.ok().body(tokenDTO);
+	}
+	
+	@PostMapping("/forgot")
+	public ResponseEntity<TokenDTO> forgot(@RequestBody EmailDTO dto) {
+		service.sendNewPassword(dto.getEmail());
+		return ResponseEntity.noContent().build();
 	}
 
 }
